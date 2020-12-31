@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\Payment;
 
 use App\Models\Payment;
 use App\Service\Exception\PaymentServiceException;
@@ -36,17 +36,20 @@ class PaymentService
     /**
      * @param Payment $payment
      * @param string|null $adapterName
-     * @return array
+     * @return string
      * @throws PaymentServiceException
      */
-    public function payLink(Payment $payment, string $adapterName = null) : array
+    public function payLink(Payment $payment, string $adapterName = null) : string
     {
         try {
             $adapter = $this->resolve($adapterName);
+            $data = $adapter->pay($payment);
+            $payment->external_id = $data['external_id'];
+            $payment->save();
         } catch (\Throwable $e) {
             throw new PaymentServiceException($e->getMessage(), $e->getCode(), $e);
         }
-        return [];
+        return $data['payLink'];
     }
 
     /**

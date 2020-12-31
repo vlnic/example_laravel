@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Payment
+ * @property string external_id
+ * @property string product_name
+ * @property string description
+ * @property int id
+ * @property string status
+ *
  * @package App\Models
  */
 class Payment extends Model

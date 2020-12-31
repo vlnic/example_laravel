@@ -21,9 +21,4 @@ interface AdapterInterface
      * @return int
      */
     public function payStatus(Payment $payment) : int;
-
-    /**
-     * @return string
-     */
-    public function adapterName() : string;
 }

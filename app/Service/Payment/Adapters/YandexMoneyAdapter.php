@@ -32,12 +32,4 @@ class YandexMoneyAdapter implements AdapterInterface
     {
         // TODO: Implement payStatus() method.
     }
-
-    /**
-     * @return string
-     */
-    public function adapterName(): string
-    {
-        // TODO: Implement adapterName() method.
-    }
 }
