@@ -12,8 +12,8 @@ return [
           'password' => env('SBER_PASS', null),
           'restUrl' => env('APP_ENV') == 'prod' || env('APP_ENV') === 'production' ? 'https://' : 'https://3dsec.sberbank.ru/payment/rest',
           'endpoints' => [
-              'createOrder' => '',
-              'orderStatus' => '',
+              'createOrder' => '/register.do',
+              'orderStatus' => '/getOrderStatusExtended.do',
           ]
       ]
   ],

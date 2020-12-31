@@ -55,12 +55,11 @@ class SberAdapter implements AdapterInterface
     public function pay(Payment $payment): array
     {
         try {
-            $client = new Client([
+            $request = new Request('POST', $this->endpoints->get('createOrder'), [], ['']);
+            $response = (new Client([
                 'base_url' => $this->restUrl,
                 'allow_redirects' => false
-            ]);
-            $request = new Request('POST', $this->endpoints->get('createOrder'), [], ['']);
-            $response = $client->send($request);
+            ]))->send($request);
             $body = json_decode($response->getBody(), true, 512, JSON_OBJECT_AS_ARRAY);
         } catch (BadResponseException | GuzzleException $e) {
             if ($e->hasResponse()) {
@@ -80,6 +79,16 @@ class SberAdapter implements AdapterInterface
      */
     public function payStatus(Payment $payment): int
     {
-        // TODO: Implement payStatus() method.
+        try {
+            $request = new Request('GET', $this->endpoints->get('orderStatus'), [], []);
+            $response = (new Client([
+                'base_url' => $this->restUrl,
+                'allow_redirects' => false
+            ]))->send($request);
+            $body = json_decode($response->getBody(), true, 512, JSON_OBJECT_AS_ARRAY);
+        } catch (\Throwable $e) {
+
+        }
+        return 0;
     }
 }
