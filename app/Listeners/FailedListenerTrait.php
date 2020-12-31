@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Handlers;
+namespace App\Listeners;
 
 /**
  * Trait FailedListenerTrait

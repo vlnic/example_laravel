@@ -1,7 +1,13 @@
 <?php declare(strict_types=1);
 
-use App\Handlers\FailedListenerTrait;
+namespace App\Listeners;
 
+use App\Listeners\FailedListenerTrait;
+
+/**
+ * Class PayLinkEventListener
+ * @package App\Listeners
+ */
 class PayLinkEventListener
 {
     use FailedListenerTrait;

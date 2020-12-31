@@ -61,16 +61,18 @@ class SberAdapter implements AdapterInterface
             ]);
             $request = new Request('POST', $this->endpoints->get('createOrder'), [], ['']);
             $response = $client->send($request);
+            $body = json_decode($response->getBody(), true, 512, JSON_OBJECT_AS_ARRAY);
         } catch (BadResponseException | GuzzleException $e) {
             if ($e->hasResponse()) {
                 throw new \RuntimeException(
                     sprintf('incorrect request, response: %s', $e->getResponse()->getBody())
                 );
             }
-        } catch (\Exception $e) {
-
         }
-        return [];
+        return [
+            'external_id' => $body['orderId'],
+            'payLink' => $body['link'],
+        ];
     }
 
     /**
